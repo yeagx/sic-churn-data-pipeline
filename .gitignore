@@ -12,3 +12,10 @@ spark-warehouse/
 derby.log
 metastore_db/
 *.log
+
+# sqoop generated
+customers.java
+*.java
+
+# local data
+data/
