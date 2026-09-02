@@ -33,7 +33,7 @@ customers_schema = StructType([
     StructField("exited_source_flag", IntegerType()),
 ])
 
-customers = spark.read.schema(customers_schema).csv(f"{RAW}/customers")
+customers = spark.read.schema(customers_schema).option("header", True).csv(f"{RAW}/customers")
 
 customers = (customers
     .withColumn("tenure_months", F.col("tenure_years") * 12)
