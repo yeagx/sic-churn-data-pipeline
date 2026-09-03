@@ -39,15 +39,15 @@ START=$(date +%s)
 banner "STAGE 1/7  Generating source data (seed 42, reproducible)"
 
 mkdir -p "$DATA" "$INBOX" data
-cp -f Churn_Modelling.csv "$HOME/Churn_Modelling.csv"
-cp -f Churn_Modelling.csv data/
+cp -f data_sources/Churn_Modelling.csv "$HOME/Churn_Modelling.csv"
+cp -f data_sources/Churn_Modelling.csv data/
 
 # generate_data.py creates offers.csv and usage.jsonl, then attempts to re-key
 # the support tickets from the raw Kaggle download. That raw file is not in the
 # repo (only the finished re-keyed output is), so step 4 exits non-zero. The
 # output it would produce is already committed, so this is expected.
-python3 generate_data.py || echo "  [note] ticket re-key step skipped - using committed support_tickets_rekeyed.csv"
-cp -f support_tickets_rekeyed.csv "$DATA/"
+python3 scripts/generate_data.py || echo "  [note] ticket re-key step skipped - using committed support_tickets_rekeyed.csv"
+cp -f data_sources/support_tickets_rekeyed.csv "$DATA/"
 
 echo "  offers.csv  : $(wc -l < "$DATA/offers.csv") lines"
 echo "  usage.jsonl : $(wc -l < "$DATA/usage.jsonl") lines"
@@ -64,8 +64,8 @@ hdfs dfs -ls "$HDFS_BASE"
 # ------------------------------------------- 3. ingestion: mysql + sqoop ----
 banner "STAGE 3/7  Ingestion path A - MySQL to HDFS via Apache Sqoop"
 
-mysql --local-infile=1 -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" < mysql_schema.sql
-bash ingest_sqoop.sh
+mysql --local-infile=1 -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" < sql/mysql_schema.sql
+bash scripts/ingest_sqoop.sh
 
 echo "  rows landed by sqoop: $(hdfs dfs -cat "$HDFS_BASE"/raw/customers/part-m-* | wc -l)"
 
