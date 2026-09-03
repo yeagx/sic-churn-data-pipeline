@@ -38,9 +38,8 @@ START=$(date +%s)
 # ------------------------------------------------------- 1. source data ----
 banner "STAGE 1/7  Generating source data (seed 42, reproducible)"
 
-mkdir -p "$DATA" "$INBOX" data
+mkdir -p "$DATA" "$INBOX"
 cp -f data_sources/Churn_Modelling.csv "$HOME/Churn_Modelling.csv"
-cp -f data_sources/Churn_Modelling.csv data/
 
 # generate_data.py creates offers.csv and usage.jsonl, then attempts to re-key
 # the support tickets from the raw Kaggle download. That raw file is not in the

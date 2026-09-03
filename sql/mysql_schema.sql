@@ -27,7 +27,7 @@ CREATE TABLE customers (
 -- SET GLOBAL local_infile = 1;
 -- Run with: mysql --local-infile=1 -u root -p < sql/mysql_schema.sql
 
-LOAD DATA LOCAL INFILE 'data/Churn_Modelling.csv'
+LOAD DATA LOCAL INFILE 'data_sources/Churn_Modelling.csv'
 INTO TABLE customers
 FIELDS TERMINATED BY ',' 
 OPTIONALLY ENCLOSED BY '"'
