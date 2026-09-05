@@ -434,5 +434,5 @@ Stated openly, because a pipeline you cannot criticise is one nobody has looked 
 | 4 | Warehouse, KPI, orchestration | Abdulrhman Mohamed |
 
 <p align="center">
-  <sub>Samsung Innovation Campus · Big Data Course · Project 1.1, Customer Churn</sub>
+  <sub>Samsung Innovation Campus · Big Data Course · Capstone Project — Customer Churn</sub>
 </p>
